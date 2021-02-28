@@ -6,7 +6,6 @@ import PublicStack from "./Public";
 
 const index = () => {
   const Auth = useSelector((state) => state.Auth);
-  console.log("Auth ----> ", Auth);
   return (
     <NavigationContainer>
       {Auth.isLogin ? <AuthStack /> : <PublicStack />}

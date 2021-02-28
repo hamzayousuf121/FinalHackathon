@@ -1,39 +1,26 @@
 import React, {useState, useEffect} from 'react';
 import { SafeAreaView} from 'react-native';
 import {SearchBar} from 'react-native-elements';
-import Cards from '../components/Cards';
-import {getList} from '../services/Auth';
+import StudentCards from '../components/StudentsCards';
+import App from '../services/firebase'
 
 export default function StudentList() {
   const [student, setStudent] = useState([]);
   const [search, setSearch] = useState('');
 
-  const getStudentList = async ()=>{
-     try {
-       const students =  await getList('students')
-
-       if(student){
-        setStudent(students);
-        console.log(students, "Student")
-
-       }
-     } catch (error) {
-       console.log(error)
-     }
-  }
-
   useEffect(() => {
-    getStudentList()
-
+    const arr = [];
+    App.firestore().collection('students').get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+          arr.push(doc.data())
+      });
+      setStudent(arr)
+  });
   },[])
   
-
-  console.log(student, "Student")
-
   const filterList = student?.filter((list) =>
-  list?.title?.toLowerCase()?.includes(search?.toLowerCase()),
-  );
-
+  list?.name?.toLowerCase()?.includes(search?.toLowerCase()));
+console.log(filterList, "sTudents")
   return (
     <SafeAreaView style={{flex: 1}}>
       <SearchBar
@@ -47,7 +34,7 @@ export default function StudentList() {
           marginHorizontal: 7,
         }}
       />
-      <Cards users={filterList} />
+      <StudentCards users={filterList} />
     </SafeAreaView>
   );
 }

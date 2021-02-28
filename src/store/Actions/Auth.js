@@ -1,13 +1,12 @@
 import { Alert } from "react-native";
 import Auth from "../../services/Auth";
-import { AuthState } from "../type";
+import { AuthState, LogOut} from "../type";
 
 export const SignUp = (name, email, password, userType) => {
   return async (dispatch) => {
     dispatch({ type: AuthState, payload: { loading: true } });
     try {
       const { user } = await Auth.register(email, password);
-      console.log(user, "User");
       if (user?.uid) {
         const data = { name, email, userType, uid: user?.uid };
         await Auth.createUser(userType, user?.uid, data);
@@ -26,13 +25,12 @@ export const SignUp = (name, email, password, userType) => {
 export const Login = (email, password, userType) => {
   return async (dispatch) => {
     console.log("email, password, userType", email, password, userType);
-    dispatch({ type: AuthState, payload: { loading: true } });
+    dispatch({ type: AuthState, payload: { loading: true, } });
     try {
       const { user } = await Auth.signin(email, password);
       console.log(user, "User");
       if (user?.uid) {
         const response = await Auth.getUser(user?.uid, userType);
-        console.log("user----> ", response);
         if (response) {
           dispatch({
             type: AuthState,
@@ -68,13 +66,22 @@ export const StudentForm = (name, qualification, phone, gpa, placeOfStudy, addre
   };
 };
 
+export const logout = () => {
+  return async (dispatch) => {  
+    dispatch({
+      type: LogOut,
+    })
+    await Auth.Logout()
+  }
+}
+
 
 export const JobPosts = (title, description, lastdate, salaray, companyname, experience) => {
   return async (dispatch) => {
     dispatch({ type: AuthState, payload: { loading: true } });
     try {
       const data = {title, description, lastdate, salaray, companyname, experience}
-         await Auth.createForm('jobs' ,data);
+         await Auth.createForm('jobs',data);
          dispatch({
               type: AuthState,
               payload: { loading: false, created: true },

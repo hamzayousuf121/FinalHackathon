@@ -1,12 +1,23 @@
 import React from 'react'
 import { View } from 'react-native'
+import { Button, Image, Header,} from 'react-native-elements'
 import {useSelector} from 'react-redux';
-import { Button, Image} from 'react-native-elements'
+import {logout} from '../store/Actions/Auth';
 
 export default function HomeScreen({navigation}) {
   const state = useSelector(state => state.Auth)
+  console.log(state, "State Auth")
+
+  const SignOut = () =>{
+      logout();
+      navigation.navigate('Login')
+  }
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
+    <Header
+      rightComponent={<Button title="Logout" onPress={()=> SignOut()} />}
+      leftComponent={<Button title="Recruitment"/>}
+    />
       <View style={{flex: 1, alignItems: 'center', width: '100%'}}>
       <Image
         source={require('../../assets/logo.png')}

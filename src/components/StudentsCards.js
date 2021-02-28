@@ -9,7 +9,7 @@ export default function Cards({users}) {
         <View style={{flex: 1, marginBottom: 15}}>
           {users.map((u, i) => (
             <Card key={i}>
-              <Card.Title>Blood Group {u.blood_group}</Card.Title>
+              <Card.Title>Name: {u.name}</Card.Title>
               <Card.Divider />
               <View style={{flex: 1}}>
                 <ListItem bottomDivider>
@@ -18,8 +18,8 @@ export default function Cards({users}) {
                       flexDirection: 'row',
                       justifyContent: 'space-between',
                     }}>
-                    <ListItem.Title>Name</ListItem.Title>
-                    <ListItem.Title>{u.full_name}</ListItem.Title>
+                    <ListItem.Title>Address</ListItem.Title>
+                    <ListItem.Title>{u.address}</ListItem.Title>
                   </ListItem.Content>
                 </ListItem>
                 <ListItem bottomDivider>
@@ -28,8 +28,8 @@ export default function Cards({users}) {
                       flexDirection: 'row',
                       justifyContent: 'space-between',
                     }}>
-                    <ListItem.Title>Gender</ListItem.Title>
-                    <ListItem.Title>{u.gender}</ListItem.Title>
+                    <ListItem.Title>GPA</ListItem.Title>
+                    <ListItem.Title>{u.gpa}</ListItem.Title>
                   </ListItem.Content>
                 </ListItem>
                 <ListItem bottomDivider>
@@ -38,8 +38,32 @@ export default function Cards({users}) {
                       flexDirection: 'row',
                       justifyContent: 'space-between',
                     }}>
+
+                  <ListItem.Title>Qualification</ListItem.Title>
+                    <ListItem.Title>{u.qualification}</ListItem.Title>
+                  </ListItem.Content>
+                </ListItem>
+                <ListItem bottomDivider>
+                  <ListItem.Content
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}>
+
+                  <ListItem.Title>Place Of Study</ListItem.Title>
+                    <ListItem.Title>{u.placeOfStudy}</ListItem.Title>
+                  </ListItem.Content>
+                </ListItem>
+                <ListItem bottomDivider>
+                  <ListItem.Content
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}>
+
+
                     <ListItem.Title>Phone No</ListItem.Title>
-                    <ListItem.Title>{u.phone_no}</ListItem.Title>
+                    <ListItem.Title>{u.phone}</ListItem.Title>
                   </ListItem.Content>
                 </ListItem>
                 <ListItem bottomDivider>
