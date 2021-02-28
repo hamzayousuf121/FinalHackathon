@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 import {logout} from '../store/Actions/Auth';
 
 export default function HomeScreen({navigation}) {
-  const state = useSelector(state => state.Auth)
+  const state = useSelector(state => state.Auth.user)
   console.log(state, "State Auth")
 
   const SignOut = () =>{
@@ -61,6 +61,19 @@ export default function HomeScreen({navigation}) {
       style={{width: '48%'}}
       onPress={()=>{
         navigation.navigate('StudentList')
+      }}
+      />
+
+      <Button
+      title="View Student Applications"
+      containerStyle={{
+       width: '95%',
+       margin: 10,
+      }}
+      type="solid"
+      style={{width: '48%'}}
+      onPress={()=>{
+        navigation.navigate('CompanyList')
       }}
       />
     </View>

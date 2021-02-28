@@ -24,12 +24,10 @@ export const SignUp = (name, email, password, userType) => {
 
 export const Login = (email, password, userType) => {
   return async (dispatch) => {
-    console.log("email, password, userType", email, password, userType);
     dispatch({ type: AuthState, payload: { loading: true, } });
     try {
       const { user } = await Auth.signin(email, password);
-      console.log(user, "User");
-      if (user?.uid) {
+    if (user?.uid) {
         const response = await Auth.getUser(user?.uid, userType);
         if (response) {
           dispatch({

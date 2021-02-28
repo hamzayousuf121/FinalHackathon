@@ -18,7 +18,6 @@ export default (state = initalState, action) => {
         ...action.payload,
       };
     case LogOut:
-      console.log('Reducer Logout')
       return initalState;
 
     default:
