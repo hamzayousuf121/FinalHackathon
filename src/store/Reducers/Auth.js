@@ -2,7 +2,7 @@ import { TapGestureHandler } from "react-native-gesture-handler";
 import { AuthState, LogOut } from "../type";
 
 const initalState = {
-  isLogin: true,
+  isLogin: false,
   login: false,
   loading: false,
   signUp: false,

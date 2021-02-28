@@ -5,8 +5,13 @@ import {useSelector} from 'react-redux';
 import {logout} from '../store/Actions/Auth';
 
 export default function HomeScreen({navigation}) {
-  const state = useSelector(state => state.Auth.user)
-  console.log(state, "State Auth")
+  var userType = 'user';
+  var type = useSelector(state => state?.Auth?.user)
+  if(type?.userType === '' || type?.userType == undefined || type?.userType == null ){
+    userType = 'user'
+  }else{
+    userType = type?.userType
+  }
 
   const SignOut = () =>{
       logout();
@@ -24,20 +29,22 @@ export default function HomeScreen({navigation}) {
         style={{ width: 200, resizeMode: 'contain', height: 150, justifyContent: 'center', alignItems: 'center'}}
       />
       </View>
-     <Button
-      title="Create Job Post"
-      containerStyle={{
-       width: '95%',
-       margin: 10,
-      }}
-      buttonStyle={{
-        backgroundColor: 'red',
-
-      }}
-      onPress={()=>{
-        navigation.navigate('Company')
-      }}
-    />
+      { userType !== 'user' && 
+        <Button
+        title="Create Job Post"
+        containerStyle={{
+          width: '95%',
+          margin: 10,
+        }}
+        buttonStyle={{
+          backgroundColor: 'red',
+        }}
+        onPress={()=>{
+          navigation.navigate('Company')
+        }}
+      />
+      }
+  
       <Button
       title="Students Application Forms"
       containerStyle={{
@@ -45,33 +52,37 @@ export default function HomeScreen({navigation}) {
        margin: 10,
       }}
       type="solid"
-      style={{width: '48%'}}
       onPress={()=>{
         navigation.navigate('Students')
       }}
     />    
+{
+  userType !== 'user' && 
+   <Button
+   title="View Student Applications"
+   containerStyle={{
+    width: '95%',
+    margin: 10,
+   }}
+   type="solid" 
+    buttonStyle={{
+     backgroundColor: 'red',
+   }}
+   onPress={()=>{
+     navigation.navigate('StudentList')
+   }}
+   />
+}
+   
 
       <Button
       title="View Student Applications"
       containerStyle={{
-       width: '95%',
        margin: 10,
-      }}
-      type="solid"
-      style={{width: '48%'}}
-      onPress={()=>{
-        navigation.navigate('StudentList')
-      }}
-      />
+       width: '95%',
 
-      <Button
-      title="View Student Applications"
-      containerStyle={{
-       width: '95%',
-       margin: 10,
       }}
       type="solid"
-      style={{width: '48%'}}
       onPress={()=>{
         navigation.navigate('CompanyList')
       }}
